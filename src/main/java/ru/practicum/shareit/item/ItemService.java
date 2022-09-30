@@ -24,7 +24,9 @@ public class ItemService {
     public ItemDto create(ItemDto itemDto, Long userId) {
         Item item = ItemMapper.toItem(itemDto);
         Optional<User> ownerOptional = userRepository.getById(userId);
-        if (ownerOptional.isEmpty()) throw new NotFoundException("user not found");
+        if (ownerOptional.isEmpty()) {
+            throw new NotFoundException("user not found");
+        }
         item.setOwner(ownerOptional.get());
         return ItemMapper.toItemDto(itemRepository.add(item));
     }
@@ -36,11 +38,15 @@ public class ItemService {
         }
         Optional<String> name = Optional.ofNullable(itemDto.getName());
         if (name.isPresent()) {
-            if (!name.get().isBlank()) item.setName(name.get());
+            if (!name.get().isBlank()) {
+                item.setName(name.get());
+            }
         }
         Optional<String> description = Optional.ofNullable(itemDto.getDescription());
         if (description.isPresent()) {
-            if (!description.get().isBlank()) item.setDescription(description.get());
+            if (!description.get().isBlank()) {
+                item.setDescription(description.get());
+            }
         }
         if (itemDto.getAvailable() != null) {
             item.setAvailable(itemDto.getAvailable());
@@ -72,7 +78,9 @@ public class ItemService {
 
     private Item getByIdOrNotFoundException(Long itemId) {
         Optional<Item> itemOptional = itemRepository.getById(itemId);
-        if (itemOptional.isEmpty()) throw new NotFoundException("item by id " + itemId);
+        if (itemOptional.isEmpty()) {
+            throw new NotFoundException("item by id " + itemId);
+        }
         return itemOptional.get();
     }
 }

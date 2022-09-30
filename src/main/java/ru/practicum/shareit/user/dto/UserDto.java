@@ -8,11 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 public class UserDto {
     Long id;
 

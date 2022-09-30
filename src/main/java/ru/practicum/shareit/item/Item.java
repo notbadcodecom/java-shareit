@@ -4,12 +4,8 @@ import lombok.*;
 import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
 
-@AllArgsConstructor
-@RequiredArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 public class Item {
     private Long id;
     private String name;

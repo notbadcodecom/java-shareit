@@ -1,13 +1,8 @@
 package ru.practicum.shareit.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 public class User {
     Long id;

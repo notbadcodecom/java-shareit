@@ -36,8 +36,12 @@ public class UserService {
         if (!user.getEmail().equals(userDto.getEmail())) {
             ifEmailExistThrowException(userDto.getEmail());
         }
-        if (userDto.getName() != null) user.setName(userDto.getName());
-        if (userDto.getEmail() != null) user.setEmail(userDto.getEmail());
+        if (userDto.getName() != null) {
+            user.setName(userDto.getName());
+        }
+        if (userDto.getEmail() != null) {
+            user.setEmail(userDto.getEmail());
+        }
         userRepository.add(user);
         return UserMapper.toUserDto(user);
     }
@@ -54,7 +58,9 @@ public class UserService {
 
     private User getByIdOrNotFoundException(Long userId) {
         Optional<User> user = userRepository.getById(userId);
-        if (user.isEmpty()) throw new NotFoundException("user by id " + userId);
+        if (user.isEmpty()) {
+            throw new NotFoundException("user by id " + userId);
+        }
         return user.get();
     }
 }

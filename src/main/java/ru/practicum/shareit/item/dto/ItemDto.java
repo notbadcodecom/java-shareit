@@ -5,11 +5,8 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
-@ToString
 public class ItemDto {
     private Long id;
     @NotBlank(message = "name is required")
