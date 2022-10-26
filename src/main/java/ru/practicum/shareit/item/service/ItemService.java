@@ -13,9 +13,9 @@ public interface ItemService {
 
     ItemAdvancedDto getById(Long itemId, Long userId);
 
-    List<ItemAdvancedDto> getAllByOwnerId(Long ownerId);
+    List<ItemAdvancedDto> getAllByOwnerId(int from, int size, Long ownerId);
 
-    List<ItemDto> findAvailableByNameOrDescription(String text);
+    List<ItemDto> findAvailableByNameOrDescription(int from, int size, String text);
 
     Item getByIdOrNotFoundError(Long itemId);
 }

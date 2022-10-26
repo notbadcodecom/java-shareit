@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BookingService {
-    Booking getBookingOrNotFoundError(Long bookingId);
+    Booking getByIdOrNotFoundError(Long bookingId);
 
     BookingAdvancedDto create(BookingDto bookingDto, Long bookerId);
 
@@ -21,9 +21,9 @@ public interface BookingService {
 
     BookingDto getNext(Long itemId, LocalDateTime now);
 
-    List<BookingAdvancedDto> getAllOfBookerByState(Long bookerId, String stateText);
+    List<BookingAdvancedDto> getAllOfBookerByState(int from, int size, Long bookerId, String stateText);
 
-    List<BookingAdvancedDto> getAllOfOwnerByState(Long ownerId, String stateText);
+    List<BookingAdvancedDto> getAllOfOwnerByState(int from, int size, Long ownerId, String stateText);
 
     boolean isBookerOfItem(Long bookerId, Long itemId);
 

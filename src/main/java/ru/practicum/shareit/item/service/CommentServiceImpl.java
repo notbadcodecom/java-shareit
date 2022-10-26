@@ -2,6 +2,7 @@ package ru.practicum.shareit.item.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.Booking;
 import ru.practicum.shareit.booking.service.BookingService;
 import ru.practicum.shareit.handler.exception.BadRequestException;
@@ -19,6 +20,7 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     @Override
+    @Transactional
     public CommentDto create(CommentDto commentDto, Long itemId, Long authorId) {
         if (commentDto.getText().isBlank()) {
             throw new BadRequestException("empty comment");

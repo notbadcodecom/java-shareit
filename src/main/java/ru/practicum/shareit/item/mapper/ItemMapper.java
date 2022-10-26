@@ -6,6 +6,7 @@ import ru.practicum.shareit.item.dto.ItemAdvancedDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.model.Item;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -16,10 +17,13 @@ public class ItemMapper {
                 .name(item.getName())
                 .description(item.getDescription())
                 .available(item.getAvailable())
+                .requestId(Optional.ofNullable(item.getItemRequest()).isPresent()
+                                ? item.getItemRequest().getId()
+                                : null)
                 .build();
     }
 
-    public static ItemAdvancedDto toItemBookingDto(
+    public static ItemAdvancedDto toItemAdvancedDto(
             Item item, BookingDto lastBooking, BookingDto nextBooking
     ) {
         return ItemAdvancedDto.builder()
@@ -32,6 +36,9 @@ public class ItemMapper {
                 .comments(item.getComments().stream()
                                 .map(CommentMapper::toCommentDto)
                                 .collect(Collectors.toList()))
+                .requestId(Optional.ofNullable(item.getItemRequest()).isPresent()
+                        ? item.getItemRequest().getId()
+                        : null)
                 .build();
     }
 
