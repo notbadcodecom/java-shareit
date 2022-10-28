@@ -55,19 +55,23 @@ public class ItemController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ItemAdvancedDto> getItemsByOwnerId(
-            @RequestHeader(name = "X-Sharer-User-Id") Long ownerId
+            @RequestHeader(name = "X-Sharer-User-Id") Long ownerId,
+            @RequestParam(name = "from", defaultValue = "0") int from,
+            @RequestParam(name = "size", defaultValue = "20") int size
     ) {
         log.info("GET /items");
-        return itemService.getAllByOwnerId(ownerId);
+        return itemService.getAllByOwnerId(from, size, ownerId);
     }
 
     @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     public List<ItemDto> searchItems(
-            @RequestParam(name = "text", defaultValue = "") String text
+            @RequestParam(name = "text", defaultValue = "") String text,
+            @RequestParam(name = "from", defaultValue = "0") int from,
+            @RequestParam(name = "size", defaultValue = "20") int size
     ) {
         log.info("GET /items/search?text={}", text);
-        return itemService.findAvailableByNameOrDescription(text);
+        return itemService.findAvailableByNameOrDescription(from, size, text);
     }
 
     @PostMapping("/{itemId}/comment")

@@ -1,14 +1,16 @@
 package ru.practicum.shareit.item.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import ru.practicum.shareit.booking.dto.BookingDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
-@Data
+@Getter
 @Builder
 public class ItemAdvancedDto {
     private Long id;
@@ -27,4 +29,8 @@ public class ItemAdvancedDto {
     private BookingDto nextBooking;
 
     private List<CommentDto> comments;
+
+    @Positive(message = "request is should be positive")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long requestId;
 }
