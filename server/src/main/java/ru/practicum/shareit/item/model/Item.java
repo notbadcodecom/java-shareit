@@ -1,6 +1,7 @@
 package ru.practicum.shareit.item.model;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
 
@@ -16,36 +17,36 @@ import java.util.List;
 @Builder
 @ToString
 @Table(name = "items", schema = "public")
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @Column(name = "name", nullable = false)
-    private String name;
+    String name;
 
     @Column(name = "description", nullable = false)
-    private String description;
+    String description;
 
     @Column(name = "available", nullable = false)
-    private Boolean available;
+    Boolean available;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private User owner;
+    User owner;
 
     @OneToMany(
             mappedBy = "item",
             cascade = CascadeType.PERSIST,
             orphanRemoval = true
     )
-    private List<Comment> comments = new ArrayList<>();
+    List<Comment> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id", referencedColumnName = "id")
-    private ItemRequest itemRequest;
+    ItemRequest itemRequest;
 
     public void addComment(Comment comment) {
         comments.add(comment);

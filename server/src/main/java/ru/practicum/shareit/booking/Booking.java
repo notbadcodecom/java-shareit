@@ -1,6 +1,7 @@
 package ru.practicum.shareit.booking;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.booking.dto.BookingStatus;
 import ru.practicum.shareit.item.model.Item;
@@ -15,31 +16,32 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "bookings", schema = "public")
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @Column(name = "start_at", nullable = false)
-    private LocalDateTime start;
+    LocalDateTime start;
 
     @Column(name = "end_at", nullable = false)
-    private LocalDateTime end;
+    LocalDateTime end;
 
     @CreationTimestamp
     @Column(name = "created", updatable = false)
-    private LocalDateTime created;
+    LocalDateTime created;
 
     @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "id")
-    private Item item;
+    Item item;
 
     @ManyToOne
     @JoinColumn(name = "booker_id", referencedColumnName = "id")
-    private User booker;
+    User booker;
 
     @Enumerated(EnumType.STRING)
-    private BookingStatus status;
+    BookingStatus status;
 }

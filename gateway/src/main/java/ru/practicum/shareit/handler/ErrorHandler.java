@@ -1,5 +1,6 @@
 package ru.practicum.shareit.handler;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Hidden
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
