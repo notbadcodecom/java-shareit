@@ -1,2 +1,34 @@
-# java-shareit
-Template repository for Shareit project.
+# Shareit project
+
+## Описание
+Бэкэнд (rest api) приложения, в котором пользователи могут:
+- добавлять вещи для шеринга;
+- бронировать вещи;
+- подтвержадть или отклянять запросы на бронирование;
+- получать данные о бронированиях по состоянию (ожидает подтверждения, подтверждено, отклонено);
+- получать данные о вещах пользователей;
+- искать вещи по наименованию и описанию;
+- делать запросы на вещи, которые еще никто не добавил;
+- предлагать вещи в ответ на запрос.
+
+## Технологии
+- Java 11, Lombok;
+- Spring Boot;
+- Spring Data, Hibernate;
+- PostgreSQL, SQL;
+- Junit, JaCoCo, Mockito;
+- Swagger;
+- Docker, docker-compose;
+- Maven (multi-module project);
+- Postman.
+
+## Запуск и тестирование проекта
+**приложение использует порты 8080, 9090, 5432.**
+1. git clone git@github.com:notbadcodecom/java-shareit.git
+2. mvn package
+3. docker-compose up
+
+Список эндпоинтов доступен в swagger после запуска приложения по ссылке: 
+http://localhost:8080/swagger.html
+
+Для тестирования приложения можно воспользоваться коллекцией Postman в одноименной папке.
