@@ -1,6 +1,7 @@
 package ru.practicum.shareit.request;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.user.User;
@@ -16,28 +17,29 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "item_requests", schema = "public")
 public class ItemRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    Long id;
 
     @Column(name = "description", nullable = false)
-    private String description;
+    String description;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "requester_id", referencedColumnName = "id")
-    private User requester;
+    User requester;
 
     @OneToMany(
             mappedBy = "itemRequest",
             cascade = CascadeType.PERSIST,
             orphanRemoval = true
     )
-    private List<Item> items = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created", updatable = false)
-    private LocalDateTime created;
+    LocalDateTime created;
 }
